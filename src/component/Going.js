@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 class Going extends Component {
   deleteTodoList(idx) {
-    console.log('going idx:', idx);
     this.props.onDelete(idx);
   }
   check(idx) {
