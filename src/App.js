@@ -35,6 +35,10 @@ class App extends Component {
       todoList: [],
       doneList: []
     };
+    this.checkItem = this.checkItem.bind(this);
+    this.inputChange = this.inputChange.bind(this);
+    this.deleteTodoList = this.deleteTodoList.bind(this);
+    this.addTodoList = this.addTodoList.bind(this);
   }
   // input框改变并赋值
   inputChange(e) {
@@ -72,14 +76,14 @@ class App extends Component {
           <input
             type="text"
             value={this.state.inputValue}
-            onChange={e => this.inputChange(e)}
+            onChange={this.inputChange}
           />
-          <button onClick={() => this.addTodoList()}>添加到todoList</button>
+          <button onClick={this.addTodoList}>添加到todoList</button>
         </div>
         <Going
           todoList={this.state.todoList}
-          onDelete={this.deleteTodoList.bind(this)}
-          onCheck={this.checkItem.bind(this)}
+          onDelete={this.deleteTodoList}
+          onCheck={this.checkItem}
         />
         <Done doneList={this.state.doneList} />
       </div>
