@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class Done extends Component {
   render() {
-    let doneList = this.props.doneList;
+    // let doneList = this.props.doneList;
+    const { doneList } = this.props;
     return (
       <div>
         已经完成：

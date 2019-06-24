@@ -7,7 +7,7 @@ class Going extends Component {
     this.props.onCheck(idx);
   }
   render() {
-    let todoList = this.props.todoList;
+    const { todoList } = this.props;
     return (
       <div>
         正在进行：
