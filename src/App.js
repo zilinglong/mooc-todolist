@@ -27,37 +27,41 @@
 import React, { Component } from 'react';
 import Going from './component/Going';
 import Done from './component/Done';
-let todoList = [];
-let doneList = [];
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      inputValue: ''
+      inputValue: '',
+      todoList: [],
+      doneList: []
     };
     this.deleteTodoList = this.deleteTodoList.bind(this);
     this.checkItem = this.checkItem.bind(this);
   }
   // input框改变并赋值
   inputChange(e) {
-    // console.log('e.target.value:', e.target.value);
     this.setState({ inputValue: e.target.value });
   }
   // 添加到todoList
   addTodoList() {
-    console.log('inputValue:', this.state.inputValue);
-    console.log('cur todoList:', todoList);
-    todoList = [...todoList, this.state.inputValue];
-    console.log('after todoList:', todoList);
+    this.setState({
+      todoList: [...this.state.todoList, this.state.inputValue]
+    });
+    this.setState({
+      inputValue: ''
+    });
   }
-  // 删除 ()=>this.deleteTodoList()
+  // 删除
   deleteTodoList(idx) {
-    console.log('App delete idx:', idx);
-    todoList.splice(idx, 1);
-    console.log('after:', todoList);
+    this.state.todoList.splice(idx, 1);
+    this.setState({
+      todoList: this.state.todoList
+    });
   }
   checkItem(idx) {
-    doneList.push(todoList.splice(idx, 1));
+    this.setState({
+      doneList: [...this.state.doneList, this.state.todoList.splice(idx, 1)]
+    });
   }
   render() {
     return (
@@ -71,11 +75,11 @@ class App extends Component {
           <button onClick={() => this.addTodoList()}>添加到todoList</button>
         </div>
         <Going
-          todoList={todoList}
+          todoList={this.state.todoList}
           onDelete={this.deleteTodoList}
           onCheck={this.checkItem}
         />
-        <Done doneList={doneList} />
+        <Done doneList={this.state.doneList} />
       </div>
     );
   }
